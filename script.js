@@ -276,7 +276,7 @@ function initParticles() {
         
         function initParticleSystem() {
             particles = [];
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 120; i++) {
                 particles.push(createParticle());
             }
         }
