@@ -74,6 +74,60 @@ html {
     width: 100%;
 }
 
+/* Offcanvas (Mobile Sidebar) */
+.offcanvas {
+    /* Slightly wider than half-screen for better room */
+    --bs-offcanvas-width: 55vw;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(12px);
+    color: #ffffff;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.offcanvas .offcanvas-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.offcanvas .offcanvas-title {
+    color: var(--primary-color);
+}
+
+.offcanvas .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+}
+
+.offcanvas .nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+.offcanvas .theme-label {
+    color: #ffffff;
+}
+
+/* Dark theme variant for offcanvas */
+.dark-theme .offcanvas {
+    background: rgba(26, 26, 26, 0.95);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Softer backdrop so content is still slightly visible */
+.offcanvas-backdrop {
+    --bs-backdrop-opacity: 0.35;
+}
+
+/* Shorter offcanvas height on mobile (expose top/bottom for click-away) */
+@media (max-width: 991.98px) {
+    .offcanvas {
+        top: 15vh;
+        bottom: 15vh;
+        height: auto;
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+        box-shadow: 8px 0 24px rgba(0, 0, 0, 0.4);
+    }
+}
+
 /* Hero Section */
 .hero-section {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('background .jpg');

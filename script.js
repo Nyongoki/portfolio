@@ -354,10 +354,11 @@ function initSmoothScrolling() {
 
 // Theme toggle functionality
 function initThemeToggle() {
-    // Use existing theme toggle in navigation bar
-    const themeContainer = document.querySelector('.theme-toggle-container');
-    const themeLabel = themeContainer.querySelector('.theme-label');
-    const themeToggle = themeContainer.querySelector('.theme-toggle');
+    // Support multiple theme toggles (navbar + offcanvas)
+    const themeContainers = document.querySelectorAll('.theme-toggle-container');
+    if (!themeContainers.length) return;
+    const themeLabels = document.querySelectorAll('.theme-label');
+    const themeToggles = document.querySelectorAll('.theme-toggle');
     
     // Add CSS for theme toggle
     const style = document.createElement('style');
@@ -464,30 +465,31 @@ function initThemeToggle() {
         }
     `;
     document.head.appendChild(style);
-    
-    // Theme toggle functionality
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-theme');
-        const icon = themeToggle.querySelector('i');
-        
-        if (document.body.classList.contains('dark-theme')) {
-            icon.className = 'fas fa-sun';
-            themeLabel.textContent = 'Light Mode';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            icon.className = 'fas fa-moon';
-            themeLabel.textContent = 'Dark Mode';
-            localStorage.setItem('theme', 'light');
-        }
-    });
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        themeToggle.querySelector('i').className = 'fas fa-sun';
-        themeLabel.textContent = 'Light Mode';
+
+    // Apply theme to body and sync all toggles/labels
+    function applyTheme(isDark) {
+        document.body.classList.toggle('dark-theme', isDark);
+        themeToggles.forEach(btn => {
+            const icon = btn.querySelector('i');
+            if (icon) icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        });
+        themeLabels.forEach(lbl => {
+            lbl.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+        });
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
+
+    // Wire all toggle buttons
+    themeToggles.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const isDark = !document.body.classList.contains('dark-theme');
+            applyTheme(isDark);
+        });
+    });
+
+    // Load saved theme and sync UI
+    const savedTheme = localStorage.getItem('theme');
+    applyTheme(savedTheme === 'dark');
 }
 
 // Notification system
