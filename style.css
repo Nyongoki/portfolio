@@ -316,9 +316,48 @@ html {
     font-weight: 600;
 }
 
-.skill-percentage {
-    color: var(--primary-color);
+/* Skill Labels */
+.skill-label {
+    font-size: 0.8rem;
     font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.skill-label.proficient {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.skill-label.learning {
+    background: rgba(0, 123, 255, 0.15);
+    color: #007bff;
+    border: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+.skill-label.exploring {
+    background: rgba(255, 193, 7, 0.15);
+    color: #d39e00;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+/* Dark theme skill labels */
+.dark-theme .skill-label.proficient {
+    background: rgba(40, 167, 69, 0.25);
+    color: #5dd879;
+}
+
+.dark-theme .skill-label.learning {
+    background: rgba(0, 123, 255, 0.25);
+    color: #6cb2ff;
+}
+
+.dark-theme .skill-label.exploring {
+    background: rgba(255, 193, 7, 0.25);
+    color: #ffc107;
 }
 
 .progress {
