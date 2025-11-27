@@ -487,9 +487,9 @@ function initThemeToggle() {
         });
     });
 
-    // Load saved theme and sync UI
+    // Load saved theme and sync UI (default to dark if no preference saved)
     const savedTheme = localStorage.getItem('theme');
-    applyTheme(savedTheme === 'dark');
+    applyTheme(savedTheme !== 'light');
 }
 
 // Notification system
