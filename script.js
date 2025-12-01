@@ -689,7 +689,7 @@ function initSnowflakes() {
     snowflakesContainer.style.display = 'block';
     
     const snowflakes = ['❄', '❅', '❆', '❄', '❅', '❆', '❄', '❅', '❆', '❄'];
-    const numSnowflakes = 60;
+    const numSnowflakes = 40;
     
     for (let i = 0; i < numSnowflakes; i++) {
         createSnowflake();
