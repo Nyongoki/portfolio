@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     initTypingEffect();
     initParticles();
+    initSnowflakes();
     initSmoothScrolling();
     initThemeToggle();
 });
@@ -667,6 +668,98 @@ function closeLightbox(lightbox) {
         }
     }, 300);
 }
+
+// Snowflakes animation
+function initSnowflakes() {
+    console.log('Snowflakes initialization started');
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    console.log(`Current date: ${currentDate}, Month (0-11): ${currentMonth}`);
+    
+    const snowflakesContainer = document.getElementById('snowflakes-container');
+    console.log('Snowflakes container found:', !!snowflakesContainer);
+    
+    // Only show snowflakes in December (month is 0-indexed, so 11 is December)
+    if (currentMonth !== 11) {
+        console.log('Not December - snowflakes will not be shown');
+        return;
+    }
+    
+    console.log('December detected - showing snowflakes!');
+    snowflakesContainer.style.display = 'block';
+    
+    const snowflakes = ['❄', '❅', '❆', '❄', '❅', '❆', '❄', '❅', '❆', '❄'];
+    const numSnowflakes = 60;
+    
+    for (let i = 0; i < numSnowflakes; i++) {
+        createSnowflake();
+    }
+    
+    function createSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+        
+        // Random size between 10px and 25px
+        const size = Math.random() * 15 + 10;
+        snowflake.style.fontSize = `${size}px`;
+        
+        // Random position
+        const startPositionX = Math.random() * window.innerWidth;
+        const startPositionY = -50;
+        
+        // Random animation duration between 5 and 15 seconds
+        const animationDuration = Math.random() * 10 + 5;
+        
+        // Random delay up to 10 seconds
+        const animationDelay = Math.random() * 10;
+        
+        // Apply styles
+        snowflake.style.left = `${startPositionX}px`;
+        snowflake.style.top = `${startPositionY}px`;
+        snowflake.style.animationDuration = `${animationDuration}s`;
+        snowflake.style.animationDelay = `${animationDelay}s`;
+        
+        // Random opacity between 0.5 and 1
+        snowflake.style.opacity = Math.random() * 0.5 + 0.5;
+        
+        // Random horizontal movement
+        const horizontalMovement = (Math.random() - 0.5) * 100;
+        snowflake.style.setProperty('--h-movement', `${horizontalMovement}px`);
+        snowflake.style.animation = `fall ${animationDuration}s linear ${animationDelay}s infinite`;
+        
+        // Add snowflake to container
+        snowflakesContainer.appendChild(snowflake);
+        
+        // Remove snowflake after animation completes to prevent DOM from getting too large
+        setTimeout(() => {
+            snowflake.remove();
+            createSnowflake(); // Create a new snowflake to replace this one
+        }, (animationDuration + animationDelay) * 1000);
+    }
+}
+
+// Update keyframes for snowflake fall with horizontal movement
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fall {
+        0% {
+            transform: translateY(-50px) translateX(0);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(calc(100vh + 20px)) translateX(var(--h-movement, 0));
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
 
 // Initialize gallery lightbox
 document.addEventListener('DOMContentLoaded', function() {
