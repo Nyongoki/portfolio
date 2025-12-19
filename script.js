@@ -802,7 +802,7 @@ window.addEventListener('load', function() {
 
 // Console message for developers
 console.log(
-    '%cTimothy Nyongoki Portfolio',
+    "%cTimothy Nyongoki's Portfolio",
     'color: #007bff; font-size: 20px; font-weight: bold;'
 );
 console.log(
