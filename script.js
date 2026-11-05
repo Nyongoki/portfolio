@@ -21,7 +21,15 @@ document.addEventListener('DOMContentLoaded', function() {
     initSnowflakes();
     initSmoothScrolling();
     initThemeToggle();
+    initCurrentYear();
 });
+
+function initCurrentYear() {
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+}
 
 // Navbar functionality
 function initNavbar() {
@@ -813,4 +821,3 @@ console.log(
     '%cInterested in collaboration? WhatsApp: +254705280974',
     'color: #17a2b8; font-size: 12px;'
 );
-
